@@ -8,6 +8,7 @@ This extension adds a new field `Bravo Fleet Management System Character URL` to
 
 This extension requires:
 
+- PHP cURL Enabled
 - Nova 2.6+
 - Nova Extension [`jquery`](https://github.com/jonmatterson/nova-ext-jquery)
 

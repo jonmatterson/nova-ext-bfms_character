@@ -78,3 +78,9 @@ $this->event->listen(['location', 'view', 'output', 'main', 'personnel_character
                   ->select('#tabs')
                   ->append($this->extension['bfms_character']->view('personnel_character', $this->skin, 'main', $event['data']));
 });
+
+$this->event->listen(['location', 'view', 'main', 'personnel_character', 'output'], function($event){
+  $event['output'] .= $this->extension['jquery']['generator']
+                  ->select('#tabs')
+                  ->append($this->extension['bfms_character']->view('personnel_character', $this->skin, 'main', $event['data']));
+});

@@ -84,3 +84,37 @@ $this->event->listen(['location', 'view', 'main', 'personnel_character', 'output
                   ->select('#tabs')
                   ->append($this->extension['bfms_character']->view('personnel_character', $this->skin, 'main', $event['data']));
 });
+
+$this->event->listen(['parser', 'parse_string', 'data', 'main', 'join'], function($event){
+    
+    // skip the email sent to the user (only the one sent to the GM needs to be modified)
+    if(empty($event['data']['sections']))
+        return;
+    
+    if(!empty($this->input->post('bfms_character_url'))){
+        $sec_keys = array_keys($event['data']['sections']);
+        if(!empty($sec_keys)){
+            array_unshift($event['data']['sections'][$sec_keys[0]]['fields'], [
+                'field' => 'BFMS Character URL',
+                'data' => '<a href="'.$this->input->post('bfms_character_url').'">'.$this->input->post('bfms_character_url').'</a>'
+            ]);
+            foreach($sec_keys as $sec_key){
+                $event['data']['sections'][$sec_key]['fields'] = array_filter(
+                    $event['data']['sections'][$sec_key]['fields'],
+                    function($field){
+                        return !in_array($field['field'], [
+                            'Personal History',
+                            'Service Record'
+                        ]);
+                    }
+                );
+            }
+            $event['data']['sections'] = array_filter(
+                $event['data']['sections'],
+                function($section){
+                    return count($section['fields']) > 0;
+                }
+            );
+        }
+    }
+});

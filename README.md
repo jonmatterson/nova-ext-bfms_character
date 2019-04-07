@@ -10,6 +10,12 @@ This extension requires:
 - Nova 2.6+
 - Nova Extension [`jquery`](https://github.com/jonmatterson/nova-ext-jquery)
 
+This extension recommends:
+
+- Nova Mod [`parser events`](https://xtras.anodyne-productions.com/item/JonM/parser-events)
+
+Without `parser events`, the BFMS character URL will not be appended to the new member join email notification.
+
 ## Installation
 
 Copy the entire directory into `applications/extensions/bfms_character`.

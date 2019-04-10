@@ -91,7 +91,8 @@ $this->event->listen(['parser', 'parse_string', 'data', 'main', 'join'], functio
     if(empty($event['data']['sections']))
         return;
     
-    if(!empty($this->input->post('bfms_character_url'))){
+    $bfmsCharacterUrl = $this->input->post('bfms_character_url');
+    if(!empty($bfmsCharacterUrl)){
         $sec_keys = array_keys($event['data']['sections']);
         if(!empty($sec_keys)){
             array_unshift($event['data']['sections'][$sec_keys[0]]['fields'], [
